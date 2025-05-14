@@ -1,4 +1,6 @@
 public class Card {
+    public static final String nums = "A123456789JQK";
+
     public enum Suit {
         SPADES(true), CLUBS(true), HEARTS(false), DIAMONDS(false);
 
@@ -6,6 +8,15 @@ public class Card {
 
         Suit(boolean color) {
             isBlack = color;
+        }
+
+        public String image() {
+            return switch(this) {
+                case SPADES -> "♠";
+                case CLUBS -> "♣";
+                case HEARTS -> "♥";
+                case DIAMONDS -> "♦";
+            };
         }
     }
     private Suit suit;
@@ -18,4 +29,10 @@ public class Card {
 
     public Suit getSuit() {return suit;}
     public int getNumber() {return number;}
+
+    public String getString() {
+        char numChar = nums.charAt(number-1);
+        String suitChar = suit.image();
+        return numChar + suitChar;
+    }
 }
