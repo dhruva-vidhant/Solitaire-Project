@@ -1,6 +1,8 @@
+//Represents a card with number and suit
 public class Card {
     public static final String nums = "A123456789JQK";
 
+    //Reprents a Suit, with its representation and color
     public enum Suit {
         SPADES(true), CLUBS(true), HEARTS(false), DIAMONDS(false);
 

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//represents a pile of cards
 public class Pile extends ArrayList<Card> {
     private int firstVisible;
 

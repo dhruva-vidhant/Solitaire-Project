@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//Represents a game, with deck and piles
 public class Game {
     private ArrayList<Card> deck = new ArrayList<>();
     private ArrayList<Pile> piles = new ArrayList<>();
