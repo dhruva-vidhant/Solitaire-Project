@@ -1,6 +1,6 @@
 public class Game {
     private ArrayList<Card> Deck;
-    private ArrayList<ArrayList<Card>> piles;
+    private ArrayList<Pile> piles;
 
     public Game() {
         var allCards = allCards();
