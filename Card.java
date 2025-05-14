@@ -30,6 +30,10 @@ public class Card {
     public Suit getSuit() {return suit;}
     public int getNumber() {return number;}
 
+    public boolean isBlack() {
+        return suit.isBlack;
+    }
+
     public String toString() {
         char numChar = nums.charAt(number-1);
         String suitChar = suit.toString();

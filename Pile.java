@@ -11,8 +11,16 @@ public class Pile extends ArrayList<Card> {
         firstVisible = size()-1;
     }
 
-    public void add(List<Card> newCards) {
-        addAll(newCards);
+    /*public boolean add(Card newCard) {
+        return add(List.of(newCard));
+    }*/
+
+    public boolean add(List<Card> newCards) {
+        Card first = newCards.get(0);
+        if(first.getNumber() != getLast().getNumber() || first.isBlack() == getLast().isBlack()) {
+            return false;
+        }
+        return addAll(newCards);
     }
 
     public List<Card> removeCards(int startIdx) {

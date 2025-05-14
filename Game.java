@@ -15,13 +15,23 @@ public class Game {
         }
     }
 
+    public void addCardFromDeck(int pile) {
+        piles.get(pile).add(deck.get(deck.size()-1));
+    }
+
+    public void moveCards(int fromPile, int fromIdx, int toPile) {
+        piles.get(toPile).add(piles.get(fromPile).removeCards(fromIdx));
+    }
+
     public void printState() {
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 7; i++) {
             for(int j = 0; j < piles.size(); j++) {
                 System.out.print(piles.get(j).display(i));
             }
             System.out.println();
         }
+        System.out.println("Deck: ");
+        for(Card c : deck) System.out.print(c + " ");
         /*for(int i = 0; i < 5; i++) {
             System.out.println(piles.get(0).display(i));
         }*/
