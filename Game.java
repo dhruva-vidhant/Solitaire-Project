@@ -30,8 +30,8 @@ public class Game {
             }
             System.out.println();
         }
-        System.out.println("Deck: ");
-        for(Card c : deck) System.out.print(c + " ");
+        //System.out.println("Deck: ");
+        //for(Card c : deck) System.out.print(c + " ");
         /*for(int i = 0; i < 5; i++) {
             System.out.println(piles.get(0).display(i));
         }*/

@@ -7,14 +7,17 @@ public class Pile extends ArrayList<Card> {
 
     public Pile(RandomAccessArray<Card> allCards, int num) {
         for(int i = 0; i < num; i++) {
-            add(allCards.removeRandom());
+            super.add(allCards.removeRandom());
         }
         firstVisible = size()-1;
     }
 
-    /*public boolean add(Card newCard) {
-        return add(List.of(newCard));
-    }*/
+    public boolean add(Card newCard) {
+        if(newCard.getNumber() != getLast().getNumber() || newCard.isBlack() == getLast().isBlack()) {
+            return false;
+        }
+        return super.add(newCard);
+    }
 
     public boolean add(List<Card> newCards) {
         Card first = newCards.get(0);
