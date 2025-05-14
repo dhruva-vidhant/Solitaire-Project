@@ -10,7 +10,7 @@ public class Card {
             isBlack = color;
         }
 
-        public String image() {
+        public String toString() {
             return switch(this) {
                 case SPADES -> "♠";
                 case CLUBS -> "♣";
@@ -32,7 +32,7 @@ public class Card {
 
     public String getString() {
         char numChar = nums.charAt(number-1);
-        String suitChar = suit.image();
+        String suitChar = suit.toString();
         return numChar + suitChar;
     }
 }
