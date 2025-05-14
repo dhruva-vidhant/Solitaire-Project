@@ -30,7 +30,7 @@ public class Card {
     public Suit getSuit() {return suit;}
     public int getNumber() {return number;}
 
-    public String getString() {
+    public String toString() {
         char numChar = nums.charAt(number-1);
         String suitChar = suit.toString();
         return numChar + suitChar;

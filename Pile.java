@@ -8,7 +8,7 @@ public class Pile extends ArrayList<Card> {
         for(int i = 0; i < num; i++) {
             add(allCards.removeRandom());
         }
-        firstVisible = cards.size()-1;
+        firstVisible = size()-1;
     }
 
     public void add(List<Card> newCards) {
@@ -16,13 +16,14 @@ public class Pile extends ArrayList<Card> {
     }
 
     public List<Card> removeCards(int startIdx) {
-        List<Card> result = subList(startIdx, cards.size());
-        removeRange(startIdx, cards.size());
+        List<Card> result = subList(startIdx, size());
+        removeRange(startIdx, size());
         firstVisible = startIdx-1;
         return result;
     }
     
     public String display(int idx) {
+        if(idx >= size()) return "  ";
         if(idx < firstVisible) return "[]";
         return get(idx).toString();
     }
