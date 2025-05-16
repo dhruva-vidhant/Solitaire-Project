@@ -1,6 +1,6 @@
 //Represents a card with number and suit
 public class Card {
-    public static final String nums = "A2345678910JQK";
+    public static final String[] nums = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 
     //Reprents a Suit, with its representation and color
     public enum Suit {
@@ -37,7 +37,7 @@ public class Card {
     }
 
     public String toString() {
-        char numChar = nums.charAt(number-1);
+        String numChar = nums[number-1];
         String suitChar = suit.toString();
         return numChar + suitChar;
     }

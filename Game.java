@@ -50,7 +50,7 @@ public class Game {
     public boolean tableauToFoundation(int pileIdx, int foundationIdx) {
         Pile p = piles[pileIdx];
         boolean result = foundationPiles[foundationIdx].addCard(p.getLast());
-        if(result) p.remove(p.size());
+        if(result) p.remove(p.size()-1);
         return result;
     }
 
@@ -82,11 +82,11 @@ public class Game {
         System.out.print("    ");
         System.out.println("♠:♣:♥:♦:");
         System.out.print("          ");
-        for(FoundationPile fp : foundationPiles) System.out.print(fp.peek() != null ? fp.peek() : "[]");
+        for(FoundationPile fp : foundationPiles) System.out.printf("%.2s", fp.peek() != null ? fp.peek() : "[]");
         System.out.println();
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < piles.length; j++) {
-                System.out.print(piles[j].display(i));
+                System.out.printf("%.2s", piles[j].display(i));
             }
             System.out.println();
         }

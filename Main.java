@@ -23,6 +23,10 @@ public class Main {
         game.printState();
         System.out.println(game.moveCards(sc.nextInt(), sc.nextInt(), sc.nextInt()));
         game.printState();
+        System.out.println(game.wasteToFoundation(sc.nextInt()));
+        game.printState();
+        System.out.println(game.tableauToFoundation(sc.nextInt(), sc.nextInt()));
+        game.printState();
         sc.close();
     }
 }

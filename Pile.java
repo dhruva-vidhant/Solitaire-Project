@@ -8,6 +8,7 @@ public class Pile extends ArrayList<Card> {
     public Pile(RandomAccessArray<Card> allCards, int num) {
         for(int i = 0; i < num; i++) {
             add(allCards.removeRandom());
+            //else add(new Card(Card.Suit.CLUBS, 10));
         }
         firstVisible = size()-1;
     }
