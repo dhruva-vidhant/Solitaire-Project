@@ -14,4 +14,7 @@ public class FoundationPile {
         lastNum++;
         return true;
     }
+
+    public Card peek() {return cards.peek();}
+
 }

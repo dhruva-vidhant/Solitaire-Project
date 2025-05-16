@@ -76,11 +76,13 @@ public class Game {
     }
 
     public void printState() {
-        System.out.print(deck.isEmpty() ? " " : "[]");
+        System.out.print(deck.isEmpty() ? "  " : "[]");
         System.out.print("  ");
         System.out.print(wastePile.isEmpty() ? "  " : wastePile.peek());
-        System.out.println("    ");
+        System.out.print("    ");
         System.out.println("♠:♣:♥:♦:");
+        System.out.print("          ");
+        for(FoundationPile fp : foundationPiles) System.out.print(fp.peek() != null ? fp.peek() : "[]");
         System.out.println();
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < piles.length; j++) {
