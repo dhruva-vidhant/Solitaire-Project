@@ -5,9 +5,14 @@ import java.util.Iterator;
 public class Game {
     private Deque<Card> deck = new ArrayDeque<>();
     private Deque<Card> wastePile = new ArrayDeque<>();
+    private FoundationPile[] foundationPiles = new FoundationPile[4];
     private Pile[] piles = new Pile[7];
 
     public Game() {
+        Card.Suit[] suits = Card.Suit.values();
+        for(int i = 0; i < 4; i++) {
+            foundationPiles[i] = new FoundationPile(suits[i]);
+        }
         var allCards = allCards();
         for(int i = 1; i <= 7; i++) {
             piles[i-1] = new Pile(allCards, i);
@@ -34,6 +39,21 @@ public class Game {
         return (firstCard.getNumber() == lastCard.getNumber()-1) && (firstCard.isBlack() != lastCard.isBlack());
     }
 
+    //assumes card in wastePile
+    public boolean wasteToFoundation(int idx) {
+        boolean result = foundationPiles[idx].addCard(wastePile.peek());
+        if(result) wastePile.pop();
+        return result;
+    }
+
+    //assumes pileIdx is valid and is not empty
+    public boolean tableauToFoundation(int pileIdx, int foundationIdx) {
+        Pile p = piles[pileIdx];
+        boolean result = foundationPiles[foundationIdx].addCard(p.getLast());
+        if(result) p.remove(p.size());
+        return result;
+    }
+
     //assumes there is a card in wastePile and that pile is valid
     public boolean moveCardToPile(int pile) {
         Pile to = piles[pile];
@@ -58,7 +78,9 @@ public class Game {
     public void printState() {
         System.out.print(deck.isEmpty() ? " " : "[]");
         System.out.print("  ");
-        if(!wastePile.isEmpty()) System.out.print(wastePile.peek());
+        System.out.print(wastePile.isEmpty() ? "  " : wastePile.peek());
+        System.out.println("    ");
+        System.out.println("♠:♣:♥:♦:");
         System.out.println();
         for(int i = 0; i < 7; i++) {
             for(int j = 0; j < piles.length; j++) {
