@@ -1,32 +1,68 @@
-import java.util.ArrayList;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.Iterator;
 //Represents a game, with deck and piles
 public class Game {
-    private ArrayList<Card> deck = new ArrayList<>();
-    private ArrayList<Pile> piles = new ArrayList<>();
+    private Deque<Card> deck = new ArrayDeque<>();
+    private Deque<Card> wastePile = new ArrayDeque<>();
+    private Pile[] piles = new Pile[7];
 
     public Game() {
         var allCards = allCards();
-        for(int i = 1; i <= 5; i++) {
-            piles.add(new Pile(allCards, i));
+        for(int i = 1; i <= 7; i++) {
+            piles[i-1] = new Pile(allCards, i);
         }
         Card c;
         while((c=allCards.removeRandom()) != null) {
-            deck.add(c);
+            deck.push(c);
         }
     }
 
-    public void addCardFromDeck(int pile) {
-        piles.get(pile).add(deck.get(deck.size()-1));
+    public void drawCard() {
+        if(!deck.isEmpty()) wastePile.push(deck.pop());
+        else {
+            deck = new ArrayDeque<>(wastePile.size());
+            Iterator<Card> iter = wastePile.descendingIterator();
+            for(Card c : (Iterable<Card>) () -> iter) {
+                deck.push(c);
+            }
+            wastePile = new ArrayDeque<>();
+        }
     }
 
-    public void moveCards(int fromPile, int fromIdx, int toPile) {
-        piles.get(toPile).add(piles.get(fromPile).removeCards(fromIdx));
+    private boolean isValid(Card firstCard, Card lastCard) {
+        return (firstCard.getNumber() == lastCard.getNumber()-1) && (firstCard.isBlack() != lastCard.isBlack());
+    }
+
+    //assumes there is a card in wastePile and that pile is valid
+    public boolean moveCardToPile(int pile) {
+        Pile to = piles[pile];
+        if(isValid(wastePile.peek(), to.get(to.size()-1))) {
+            piles[pile].add(wastePile.pop());
+            return true;
+        }
+        return false;
+    }
+
+    //assumes valid fromIdx and piles
+    public boolean moveCards(int fromPile, int fromIdx, int toPile) {
+        Pile from = piles[fromPile];
+        Pile to = piles[toPile];
+        if(isValid(from.get(fromIdx), to.get(to.size()-1))) {
+            piles[toPile].add(piles[fromPile].removeCards(fromIdx));
+            return true;
+        }
+        return false;
     }
 
     public void printState() {
+        System.out.print(deck.isEmpty() ? " " : "[]");
+        System.out.print("  ");
+        if(!wastePile.isEmpty()) System.out.print(wastePile.peek());
+        System.out.println();
         for(int i = 0; i < 7; i++) {
-            for(int j = 0; j < piles.size(); j++) {
-                System.out.print(piles.get(j).display(i));
+            for(int j = 0; j < piles.length; j++) {
+                System.out.print(piles[j].display(i));
             }
             System.out.println();
         }

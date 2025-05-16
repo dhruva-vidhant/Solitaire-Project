@@ -5,7 +5,7 @@ public class Main {
         Game game = new Game();
         game.printState();
         Scanner sc = new Scanner(System.in);
-        while(true) {
+        /*while(true) {
             System.out.println("Type A to add a card to a pile, M to move cards between piles, and Q to quit");
             switch(sc.nextLine()) {
                 case "A" -> {
@@ -16,6 +16,13 @@ public class Main {
                     System.out.println("Type which pile you want to take it from");
                 }
             }
-        }
+        }*/
+        game.drawCard();
+        game.printState();
+        System.out.println(game.moveCardToPile(sc.nextInt()));
+        game.printState();
+        System.out.println(game.moveCards(sc.nextInt(), sc.nextInt(), sc.nextInt()));
+        game.printState();
+        sc.close();
     }
 }
