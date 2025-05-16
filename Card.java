@@ -16,8 +16,8 @@ public class Card {
             return switch(this) {
                 case SPADES -> "♠";
                 case CLUBS -> "♣";
-                case HEARTS -> "♥";
-                case DIAMONDS -> "♦";
+                case HEARTS -> "♥\033[0;31m";
+                case DIAMONDS -> "♦\033[0;31m";
             };
         }
     }
