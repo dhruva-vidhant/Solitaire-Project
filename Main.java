@@ -29,5 +29,6 @@ public class Main {
         game.printState();
         sc.close();
         //test;
+        //2nd test
     }
 }
