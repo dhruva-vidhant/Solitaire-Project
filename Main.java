@@ -28,5 +28,6 @@ public class Main {
         System.out.println(game.tableauToFoundation(sc.nextInt(), sc.nextInt()));
         game.printState();
         sc.close();
+        //test;
     }
 }
