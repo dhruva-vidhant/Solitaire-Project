@@ -2,7 +2,7 @@
 public class Card {
     public static final String[] nums = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 
-    //Reprents a Suit, with its representation and color
+    //Represents a Suit, with its representation and color
     public enum Suit {
         SPADES(true), CLUBS(true), HEARTS(false), DIAMONDS(false);
 
