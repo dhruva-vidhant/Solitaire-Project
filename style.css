@@ -1,0 +1,114 @@
+body{
+    background-color: #6aad7f;
+}
+
+h1{
+    position: absolute;
+    left: 350px;
+    color: white;
+    border-style: double;
+}
+
+h4{
+    position: absolute;
+    left: 1150px;
+    top:680px;
+    color: white;
+}
+
+.card{
+    width:150px;
+    height:225px;
+    position: absolute;
+}
+
+/*Miscellaneous Card Stack*/
+#cardBack1-1{
+    left:10px;
+}
+
+/*1st Card Stack*/
+#redHeartAce{
+    top:250px;
+    left:275px;
+}
+
+/*2nd Card Stack*/
+#cardBack2-1{
+    top:250px;
+    left:475px;
+}
+#redDiamond3{
+    top:275px;
+    left:475px;
+}
+
+/*3rd Card Stack*/
+#cardBack3-1{
+    top:250px;
+    left:675px;
+}
+#cardBack3-2{
+    top:275px;
+    left:675px;
+}
+#spadeBlackQueen{
+    top:300px;
+    left:675px;
+}
+
+/*4th Card Stack*/
+#cardBack4-1{
+    top:250px;
+    left:875px;
+}
+#cardBack4-2{
+    top:275px;
+    left:875px;
+}
+#cardBack4-3{
+    top:300px;
+    left:875px;
+}
+#redHeart10{
+    top:325px;
+    left:875px;
+}
+
+/*5th Card Stack*/
+#cardBack5-1{
+    top:250px;
+    left:1075px;
+}
+#cardBack5-2{
+    top:275px;
+    left:1075px;
+}
+#cardBack5-3{
+    top:300px;
+    left:1075px;
+}
+#cardBack5-4{
+    top:325px;
+    left:1075px;
+}
+#spadeBlack8{
+    top:350px;
+    left:1075px;
+}
+
+
+/*Card Border Positions*/
+#cardBorder1{
+    left:700px;
+}
+#cardBorder2{
+    left:900px;
+}
+#cardBorder3{
+    left:1100px;
+}
+#cardBorder4{
+    left:1300px;
+}
+
