@@ -6,7 +6,7 @@ public class Game {
     private Deque<Card> deck = new ArrayDeque<>();
     private Deque<Card> wastePile = new ArrayDeque<>();
     private FoundationPile[] foundationPiles = new FoundationPile[4];
-      private static int numCols = 5; 
+    private static int numCols = 5; 
     private Pile[] piles = new Pile[numCols];
 
     public Game() {
