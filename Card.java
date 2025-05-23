@@ -2,7 +2,7 @@
 public class Card {
     public static final String[] nums = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 
-    //Represents a Suit, with its representation and color
+    //Reprents a Suit, with its representation and color
     public enum Suit {
         SPADES(true), CLUBS(true), HEARTS(false), DIAMONDS(false);
 
@@ -16,8 +16,8 @@ public class Card {
             return switch(this) {
                 case SPADES -> "♠";
                 case CLUBS -> "♣";
-                case HEARTS -> "♥\033[0;31m";
-                case DIAMONDS -> "♦\033[0;31m";
+                case HEARTS -> "\u001B[31m♥" + "\u001B[30m";
+                case DIAMONDS -> "\u001B[31m♦" + "\u001B[30m";
             };
         }
     }
@@ -39,6 +39,7 @@ public class Card {
     public String toString() {
         String numChar = nums[number-1];
         String suitChar = suit.toString();
-        return numChar + suitChar;
+        String space = number == 10 ? "" : " ";
+        return numChar + suitChar + space;
     }
 }
