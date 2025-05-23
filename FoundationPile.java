@@ -15,6 +15,8 @@ public class FoundationPile {
         return true;
     }
 
+    public boolean isDone() {return lastNum == 13;}
+
     public Card peek() {return cards.peek();}
 
 }
