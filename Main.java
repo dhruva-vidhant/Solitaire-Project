@@ -12,34 +12,37 @@ public class Main {
                 5. Move a card from the waste pile to a foundation (suit) pile
                 6. Quit
                 """;
+        //game.testCard();
         try(Scanner sc = new Scanner(System.in)) {
             String errorMsg = "Sorry, that is not a valid move. Please try again.";
             while(true) {
                 game.printState();
                 System.out.println(msg);
-                switch(sc.nextLine()) {
+                String s = sc.nextLine();
+                while(s.equals("")) s = sc.nextLine();
+                switch(s) {
                     case "1" -> game.drawCard();
                     case "2" -> {
-                        System.out.println("Input the pile you want to move it to (from 1-7)");
-                        int pile = sc.nextInt()-1;
+                        System.out.println("Input the pile you want to move it to (from 1-5)");
+                        int pile = sc.nextInt();
                         if(!game.moveCardToPile(pile)) System.out.println(errorMsg);
                     }
                     case "3" -> {
-                        System.out.println("Input the starting pile (from 1-7)");
-                        int fromPile = sc.nextInt()-1;
+                        System.out.println("Input the starting pile (from 1-5)");
+                        int fromPile = sc.nextInt();
                         System.out.println("Input which card in that pile you want to move");
-                        int fromIdx = sc.nextInt()-1;
-                        System.out.println("Input the destination (from 1-7)");
-                        int toPile = sc.nextInt()-1;
+                        int fromIdx = sc.nextInt();
+                        System.out.println("Input the destination (from 1-5)");
+                        int toPile = sc.nextInt();
                         if(!game.moveCards(fromPile, fromIdx, toPile)) {
                             System.out.println(errorMsg);
                         }
                     }
                     case "4" -> {
                         System.out.println("From which pile?");
-                        int pile = sc.nextInt()-1;
+                        int pile = sc.nextInt();
                         System.out.println("And to which foundation pile?");
-                        int foundation = sc.nextInt()-1;
+                        int foundation = sc.nextInt();
                         if(!game.tableauToFoundation(pile, foundation)) System.out.println(errorMsg);
                         if(game.isWon()) {
                             System.out.println("Congrats, you won!");
@@ -48,7 +51,7 @@ public class Main {
                     }
                     case "5" -> {
                         System.out.println("To which foundation pile?");
-                        int foundation = sc.nextInt()-1;
+                        int foundation = sc.nextInt();
                         if(!game.wasteToFoundation(foundation)) System.out.println(errorMsg);
                         if(game.isWon()) {
                             System.out.println("Congrats, you won!");

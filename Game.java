@@ -24,6 +24,15 @@ public class Game {
         }
     }
 
+    /*public void testCard() {
+        wastePile.push(new Card(Card.Suit.CLUBS, 10));
+        wastePile.push(new Card(Card.Suit.DIAMONDS, 11));
+        for(Card c : deck) System.out.println(c);
+        for(int i = 0; i <= deck.size(); i++) drawCard();
+        System.out.println();
+        for(Card c : deck) System.out.println(c);
+    }*/
+
     public void drawCard() {
         if(!deck.isEmpty()) wastePile.push(deck.pop());
         else {
@@ -37,30 +46,39 @@ public class Game {
     }
 
     private boolean isValid(Card firstCard, Card lastCard) {
-        if(firstCard==null) return lastCard.getNumber() == 13;
+        if(lastCard==null) return firstCard.getNumber() == 13;
         return (firstCard.getNumber() == lastCard.getNumber()-1) && (firstCard.isBlack() != lastCard.isBlack());
     }
 
-    //assumes card in wastePile
     public boolean wasteToFoundation(int idx) {
-        boolean result = foundationPiles[idx].addCard(wastePile.peek());
+        if(wastePile.isEmpty() || invalidFound(idx)) return false;
+        boolean result = foundationPiles[idx-1].addCard(wastePile.peek());
         if(result) wastePile.pop();
         return result;
     }
 
-    //assumes pileIdx is valid and is not empty
+    private boolean invalidFound(int idx) {
+        return idx < 1 || idx > 4;
+    }
+
+    private boolean invalidPile(int idx) {
+        return idx < 1 || idx > numCols;
+    }
+
     public boolean tableauToFoundation(int pileIdx, int foundationIdx) {
-        Pile p = piles[pileIdx];
-        boolean result = foundationPiles[foundationIdx].addCard(p.removeLast());
-        if(result) p.remove(p.size()-1);
+        if(invalidPile(pileIdx) || invalidFound(foundationIdx)) return false;
+        if(piles[pileIdx-1].isEmpty()) return false;
+        Pile p = piles[pileIdx-1];
+        boolean result = foundationPiles[foundationIdx-1].addCard(p.getLast());
+        if(result) p.removeLast();
         return result;
     }
 
-    //assumes there is a card in wastePile and that pile is valid
     public boolean moveCardToPile(int pile) {
-        Pile to = piles[pile];
+        if(wastePile.isEmpty() || invalidPile(pile)) return false;
+        Pile to = piles[pile-1];
         if(isValid(wastePile.peek(), to.get(to.size()-1))) {
-            piles[pile].add(wastePile.pop());
+            to.add(wastePile.pop());
             return true;
         }
         return false;
@@ -73,14 +91,16 @@ public class Game {
         return true;
     }
 
-    //assumes valid fromIdx and piles
     public boolean moveCards(int fromPile, int fromIdx, int toPile) {
-        Pile from = piles[fromPile];
-        Pile to = piles[toPile];
-        if(isValid(from.isEmpty() ? null : from.get(fromIdx), to.get(to.size()-1)) && fromIdx < from.size()) {
-            piles[toPile].add(piles[fromPile].removeCards(fromIdx));
+        if(invalidPile(fromPile) || invalidPile(toPile)) return false;
+        Pile from = piles[fromPile-1];
+        Pile to = piles[toPile-1];
+        if(fromIdx > from.size()) return false;
+        if(isValid(from.get(fromIdx-1), to.isEmpty() ? null : to.get(to.size()-1))) {
+            to.add(from.removeCards(fromIdx-1));
             return true;
         }
+        //throw new RuntimeException(from.get(fromIdx-1).toString());
         return false;
     }
 
@@ -89,9 +109,9 @@ public class Game {
         System.out.print("   ");
         System.out.print(wastePile.isEmpty() ? "   " : wastePile.peek()); //Grab deck left over
         System.out.print("    ");
-        System.out.println("♠:♣:" + "\u001B[31m♥" + "\u001B[30m:" + "\u001B[31m♦" + "\u001B[30m:");
+        System.out.println("♠: ♣: " + "\u001B[31m♥ " + "\u001B[30m:" + "\u001B[31m♦ " + "\u001B[30m:");
         System.out.print("            ");
-        for(FoundationPile fp : foundationPiles) System.out.printf("%s", fp.peek() != null ? fp.peek() : "[]"); //Suit decks
+        for(FoundationPile fp : foundationPiles) System.out.printf("%s", fp.peek() != null ? fp.peek() : "[ ]"); //Suit decks
         System.out.println();
         System.out.println("  1  2  3  4  5"); //Col nums
         int largestLen = piles[0].size();

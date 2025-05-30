@@ -17,9 +17,13 @@ public class Pile extends ArrayList<Card> {
         addAll(newCards);
     }
 
+    public Card getLast() {
+        return get(size()-1);
+    }
+
     public Card removeLast() {
         firstVisible--;
-        return super.removeLast();
+        return super.remove(size()-1);
     }
 
     public List<Card> removeCards(int startIdx) {
